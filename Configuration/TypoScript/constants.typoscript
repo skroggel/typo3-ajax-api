@@ -1,0 +1,26 @@
+plugin.tx_ajaxapi {
+	view {
+		# cat=plugin.tx_ajaxapi/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:ajax_api/Resources/Private/Templates/
+
+		# cat=plugin.tx_ajaxapi/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:ajax_api/Resources/Private/Partials/
+
+		# cat=plugin.tx_ajaxapi/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:ajax_api/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_ajaxapi//a; type=string; label=Default storage PID
+		storagePid =
+	}
+
+	settings {
+
+        # cat=plugin.tx_ajaxapi//a; type=boolean; label=Include jQuery?
+        includeJQuery = 0
+
+        # cat=plugin.tx_ajaxapi//a; type=boolean; label=Include JS for AJAX-API?
+        includeAjaxApiJs = 0
+	}
+}
+
