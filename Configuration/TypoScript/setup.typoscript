@@ -1,0 +1,58 @@
+#############################################################################
+# Tables that are extended
+#############################################################################
+config.tx_extbase {
+    persistence {
+        classes {
+
+            Madj2k\AjaxApi\Domain\Model\Content {
+                mapping {
+                    tableName = tt_content
+                    recordType =
+                }
+            }
+        }
+    }
+}
+
+#############################################################################
+# Configuration
+#############################################################################
+plugin.tx_ajaxapi {
+    view {
+        templateRootPath = {$plugin.tx_ajaxapi.view.templateRootPath}
+        partialRootPath = {$plugin.tx_ajaxapi.view.partialRootPath}
+        layoutRootPath = {$plugin.tx_ajaxapi.view.layoutRootPath}
+    }
+
+    persistence {
+        storagePid = {$plugin.tx_ajaxapi.persistence.storagePid}
+    }
+
+    features {
+        # uncomment the following line to enable the new Property Mapper.
+        # rewrittenPropertyMapper = 1
+    }
+
+    #===============================================================
+    # Settings
+    #===============================================================
+    settings {
+
+
+    }
+}
+
+
+#===============================================================
+# CSS
+#===============================================================
+plugin.tx_ajaxapi._CSS_DEFAULT_STYLE (
+
+)
+
+
+#===============================================================
+# Includes
+#===============================================================
+<INCLUDE_TYPOSCRIPT: source="DIR:./Includes" extensions="typoscript">
