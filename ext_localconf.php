@@ -1,20 +1,21 @@
 <?php
 defined('TYPO3_MODE') || die('Access denied.');
 
+
+
 call_user_func(
     function($extKey)
     {
-
         //=================================================================
-        // Add TypoScript
+        // Add TypoScript automatically
         //=================================================================
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript(
-            'Ajax API',
+            'AJAX API',
             'constants',
             '<INCLUDE_TYPOSCRIPT: source="FILE: EXT:ajax_api/Configuration/TypoScript/constants.typoscript">'
         );
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript(
-            'Ajax API',
+            'AJAX API',
             'setup',
             '<INCLUDE_TYPOSCRIPT: source="FILE: EXT:ajax_api/Configuration/TypoScript/setup.typoscript">'
         );

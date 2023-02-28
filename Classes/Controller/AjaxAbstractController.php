@@ -21,6 +21,7 @@ use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use Madj2k\CoreExtended\Utility\GeneralUtility as GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Class AjaxAbstractController
@@ -134,8 +135,17 @@ abstract class AjaxAbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\
             || (! $flexFormData = $this->configurationManager->getContentObject()->data['pi_flexform'])
         ){
 
+            /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+
+            /** @var \Madj2k\AjaxApi\Domain\Repository\ContentRepository $contentRepository */
+            $contentRepository = $objectManager->get(ContentRepository::class);
+
+            /** @var \Madj2k\AjaxApi\Helper\AjaxHelper $ajaxHelper */
+            $ajaxHelper = $objectManager->get(AjaxHelper::class);
+
             /** @var \Madj2k\AjaxApi\Domain\Model\Content $content */
-            if ($content = $this->contentRepository->findByIdentifier($this->ajaxHelper->getContentUid())){
+            if ($content = $contentRepository->findByIdentifier($ajaxHelper->getContentUid())){
                 $flexFormData = $content->getPiFlexform();
             }
         }
