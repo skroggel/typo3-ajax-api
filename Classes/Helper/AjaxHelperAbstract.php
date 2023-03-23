@@ -124,7 +124,7 @@ abstract class AjaxHelperAbstract
 
 
     /**
-     * Checks if was an form post
+     * Checks if was a form post
      *
      * @return bool
      */
@@ -147,7 +147,7 @@ abstract class AjaxHelperAbstract
     {
 
         if (!$this->logger instanceof \TYPO3\CMS\Core\Log\Logger) {
-            $this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
+            $this->logger = GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
         }
 
         return $this->logger;
