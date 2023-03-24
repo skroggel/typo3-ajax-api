@@ -238,7 +238,7 @@ To achieve this you simply can add a template-tag to the website. The following 
 <f:comment><!-- only do an ajax-call if fe-cookie is set. This is to reduce requests to the server--></f:comment>
 <script type="text/javascript">
     var txExampleAjaxUrl = "{f:uri.action(action:'loginInfo', absolute:'1', addQueryString: '1', additionalParams:'{ajax_api : \'{key: ajaxHelper.key, cid: ajaxHelper.contentUid, idl: \\\'1\\\'}\'}') -> f:format.raw()}";
-    if (document.cookie.indexOf('fe_typo_user=') > -1) {
+    if (document.cookie.indexOf('fe_logged_in=') > -1) {
         document.getElementById('tx-example-login-info-ajax').setAttribute('data-ajax-url', txExampleAjaxUrl);
     }
 </script>
@@ -252,7 +252,7 @@ In that use-case it is also important to use the forward-method in case of an er
  <f:if condition="! {ajaxHelper.isPostCall}">
      <script type="text/javascript">
          var txExampleAjaxUrl = "{f:uri.action(action:'loginInfo', absolute:'1', addQueryString: '1', additionalParams:'{ajax_api : \'{key: ajaxHelper.key, cid: ajaxHelper.contentUid, idl: \\\'1\\\'}\'}') -> f:format.raw()}";
-         if (document.cookie.indexOf('fe_typo_user=') > -1) {
+         if (document.cookie.indexOf('fe_logged_in=') > -1) {
              document.getElementById('tx-example-login-info-ajax').setAttribute('data-ajax-url', txExampleAjaxUrl);
          }
      </script>
@@ -265,5 +265,5 @@ To archive this you can simply add the corresponding attribute `data-ajax-max-wi
 <template class="ajax" data-ajax-max-width="1280" data-ajax-url="{f:uri.action(action:'mobileMenu', absolute:'1', additionalParams:'{ajax_api : \'{key: ajaxHelper.key, cid: ajaxHelper.contentUid, idl: \\\'1\\\'}\'}') -> f:format.raw()}"></template>
  ```
 
-### Additional hints
+## Additional hints
 Since version v8.7.57-stable all requests are sent as "POST" to avoid the JS error "HTTP Error 414. The request URL is too long"
