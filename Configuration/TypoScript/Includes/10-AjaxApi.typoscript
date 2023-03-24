@@ -1,13 +1,13 @@
 
 # Add jquery if needed and not disabled
-[globalVar = LIT:1 = {$plugin.tx_ajaxapi.settings.includeJQuery}] && [globalVar = LIT:1 = {$plugin.tx_ajaxapi.settings.includeAjaxApiJs}]
+[{$plugin.tx_ajaxapi.settings.includeJQuery} ==1 && {$plugin.tx_ajaxapi.settings.includeAjaxApiJs} == 1]
     page.includeJSFooterlibs.txAjaxApiJQuery = EXT:ajax_api/Resources/Public/Js/jQuery-3.4.1-min.js
-[global]
+[END]
 
 # Add JS for Ajax-API
-[globalVar = LIT:1 = {$plugin.tx_ajaxapi.settings.includeAjaxApiJs}]
+[{$plugin.tx_ajaxapi.settings.includeAjaxApiJs} == 1]
     page.includeJSFooter.txAjaxApiJsApi = EXT:ajax_api/Resources/Public/Js/AjaxApi-2.0-min.js
-[global]
+[END]
 
 
 txAjaxApiPage = PAGE
