@@ -131,7 +131,9 @@ abstract class AjaxAbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\
         // load data from ContentObjectRender or via database
         $flexFormData = '';
         if (
+            // @extensionScannerIgnoreLine
             (! $this->configurationManager->getContentObject())
+            // @extensionScannerIgnoreLine
             || (! $flexFormData = $this->configurationManager->getContentObject()->data['pi_flexform'])
         ){
 

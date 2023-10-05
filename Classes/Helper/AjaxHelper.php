@@ -105,6 +105,7 @@ class AjaxHelper extends AjaxHelperAbstract
         $this->frontendController = $frontendController;
         if (
             ($this->frontendController->getConfigurationManager())
+            // @extensionScannerIgnoreLine
             && ($contentObject = $this->frontendController->getConfigurationManager()->getContentObject())
             && ($contentUid = $contentObject->data['uid'])
         ) {
