@@ -46,22 +46,43 @@ abstract class AjaxAbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\
 
 
     /**
-     * @var \Madj2k\AjaxApi\Domain\Repository\ContentRepository
+     * @var \Madj2k\AjaxApi\Domain\Repository\ContentRepository|null
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected ContentRepository $contentRepository;
+    protected ?ContentRepository $contentRepository = null;
 
 
     /**
-     * @var \Madj2k\AjaxApi\Helper\AjaxHelper
+     * @var \Madj2k\AjaxApi\Helper\AjaxHelper|null
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected AjaxHelper $ajaxHelper;
+    protected ?AjaxHelper $ajaxHelper = null;
+
+
+    /**
+     * @param \Madj2k\AjaxApi\Domain\Repository\ContentRepository $contentRepository
+     * @return void
+     */
+    public function injectContentRepository(ContentRepository $contentRepository): void
+    {
+        $this->contentRepository = $contentRepository;
+    }
+
+
+    /**
+     * @param \Madj2k\AjaxApi\Helper\AjaxHelper $ajaxHelper
+     * @return void
+     */
+    public function injectAjaxHelper(AjaxHelper $ajaxHelper): void
+    {
+        $this->ajaxHelper = $ajaxHelper;
+    }
 
 
     /**
      * @param ConfigurationManagerInterface $configurationManager
      * @return void
+     * @throws \TYPO3\CMS\Extbase\Object\Exception
      */
     public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager): void
     {
@@ -124,6 +145,7 @@ abstract class AjaxAbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\
      * Loads settings from Flexform and adds them to settings array
      *
      * @return void
+     * @throws \TYPO3\CMS\Extbase\Object\Exception
      */
     protected function loadSettingsFromFlexForm(): void
     {

@@ -34,17 +34,17 @@ class AjaxView extends \TYPO3\CMS\Fluid\View\TemplateView
 {
 
     /**
-     * @var \Madj2k\AjaxApi\Encoder\JsonEncoder
+     * @var \Madj2k\AjaxApi\Encoder\JsonEncoder|null
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected JsonEncoder $jsonEncoder;
+    protected ?JsonEncoder $jsonEncoder = null;
 
 
     /**
-     * @var \Madj2k\AjaxApi\Helper\AjaxRequestHelper
+     * @var \Madj2k\AjaxApi\Helper\AjaxRequestHelper|null
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected AjaxRequestHelper $ajaxRequestHelper;
+    protected ?AjaxRequestHelper $ajaxRequestHelper = null;
 
 
     /**
@@ -63,6 +63,26 @@ class AjaxView extends \TYPO3\CMS\Fluid\View\TemplateView
      * @var \TYPO3\CMS\Core\Log\Logger|null
      */
     protected ?Logger $logger = null;
+
+
+    /**
+     * @param \Madj2k\AjaxApi\Encoder\JsonEncoder $jsonEncoder
+     * @return void
+     */
+    public function injectJsonEncoder(JsonEncoder $jsonEncoder): void
+    {
+        $this->jsonEncoder = $jsonEncoder;
+    }
+
+
+    /**
+     * @param \Madj2k\AjaxApi\Helper\AjaxRequestHelper $ajaxRequestHelper
+     * @return void
+     */
+    public function injectAjaxRequestHelper(AjaxRequestHelper $ajaxRequestHelper): void
+    {
+        $this->ajaxRequestHelper = $ajaxRequestHelper;
+    }
 
 
     /**
