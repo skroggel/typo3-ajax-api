@@ -29,9 +29,9 @@ class AjaxHelper extends AjaxHelperAbstract
 
 
     /**
-     * @var \Madj2k\AjaxApi\Controller\AjaxControllerInterface
+     * @var \Madj2k\AjaxApi\Controller\AjaxControllerInterface|null
      */
-    protected $frontendController;
+    protected ?AjaxControllerInterface $frontendController = null;
 
 
     /**

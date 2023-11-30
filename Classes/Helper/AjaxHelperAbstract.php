@@ -50,9 +50,9 @@ abstract class AjaxHelperAbstract
 
 
     /**
-     * @var \TYPO3\CMS\Core\Log\Logger
+     * @var \TYPO3\CMS\Core\Log\Logger|null
      */
-    protected $logger;
+    protected ?Logger $logger = null;
 
 
     /**
