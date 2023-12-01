@@ -34,14 +34,14 @@ class AjaxView extends \TYPO3\CMS\Fluid\View\TemplateView
 {
 
     /**
-     * @var \Madj2k\AjaxApi\Encoder\JsonEncoder|null
+     * @var \Madj2k\AjaxApi\Encoder\JsonEncoder
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected ?JsonEncoder $jsonEncoder = null;
 
 
     /**
-     * @var \Madj2k\AjaxApi\Helper\AjaxRequestHelper|null
+     * @var \Madj2k\AjaxApi\Helper\AjaxRequestHelper
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected ?AjaxRequestHelper $ajaxRequestHelper = null;
