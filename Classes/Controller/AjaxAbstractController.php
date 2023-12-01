@@ -46,14 +46,14 @@ abstract class AjaxAbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\
 
 
     /**
-     * @var \Madj2k\AjaxApi\Domain\Repository\ContentRepository|null
+     * @var \Madj2k\AjaxApi\Domain\Repository\ContentRepository
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected ?ContentRepository $contentRepository = null;
 
 
     /**
-     * @var \Madj2k\AjaxApi\Helper\AjaxHelper|null
+     * @var \Madj2k\AjaxApi\Helper\AjaxHelper
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected ?AjaxHelper $ajaxHelper = null;
