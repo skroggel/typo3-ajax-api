@@ -160,7 +160,7 @@ class JsonTemplateEncoder extends AbstractJsonEncoder
      * @return NULL|string
      * @throws \TYPO3Fluid\Fluid\View\Exception\InvalidTemplateResourceException
      */
-    public function getHtmlRaw($html, string $template = '') :? string
+    public function getHtmlRaw($html, string $template = ''): ?string
     {
 
         // set template if possible
