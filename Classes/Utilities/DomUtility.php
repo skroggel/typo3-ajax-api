@@ -150,7 +150,7 @@ class DomUtility
     public static function getElementById(
         string $html,
         string $id
-    ):? \DOMElement {
+    ): ?\DOMElement {
 
         // load DOM without implied wrappers
         $htmlObject = new HTML5(

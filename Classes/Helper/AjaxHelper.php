@@ -87,7 +87,7 @@ class AjaxHelper extends AjaxHelperAbstract
      *
      * @return \Madj2k\AjaxApi\Controller\AjaxControllerInterface
      */
-    public function getFrontendController ():? AjaxControllerInterface
+    public function getFrontendController (): ?AjaxControllerInterface
     {
         return $this->frontendController;
     }

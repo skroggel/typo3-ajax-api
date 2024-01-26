@@ -25,7 +25,6 @@ namespace Madj2k\AjaxApi\Encoder;
  */
 abstract class AbstractJsonEncoder implements EncoderInterface
 {
-
     /**
      * @const int
      */
