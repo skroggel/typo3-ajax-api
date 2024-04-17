@@ -37,6 +37,7 @@ First you will have to extend your `ActionContoller` from the `AjaxControllerAbs
  ```
 Now that the basic functionality is available we can use it.
 This is best explained using an example.
+
 ### Example
 Let's pretend you have an extension which:
  * renders a list of elements
