@@ -41,9 +41,14 @@ class AjaxHelper extends AjaxHelperAbstract
      */
     public function getKey (): string
     {
-        if (! $this->key) {
-            $this->calculateKey();
-        }
+        /** Leads to strange behaviour since TYPO3 v10 - so we generate the key new every time now
+            if (! $this->key) {
+                $this->calculateKey();
+            }
+            return $this->key;
+        */
+
+        $this->calculateKey();
         return $this->key;
     }
 
