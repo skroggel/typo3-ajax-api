@@ -83,7 +83,6 @@ class JsonTemplateEncoder extends AbstractJsonEncoder
 
         /** @var \TYPO3\CMS\Extbase\Mvc\Web\Request $webRequest */
         $webRequest = $objectManager->get(Request::class);
-        $webRequest->setControllerVendorName($request->getControllerVendorName());
         $webRequest->setControllerExtensionName($request->getControllerExtensionName());
         $webRequest->setPluginName($request->getPluginName());
         $webRequest->setControllerName($request->getControllerName());
