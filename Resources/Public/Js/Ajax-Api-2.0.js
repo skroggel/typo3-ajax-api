@@ -48,7 +48,7 @@
             'data-feedback-url'
           );
         }
-        
+
         if (this.settings.$el.data('ajax-indicator-id')) {
           this.settings.indicatorTarget = $('#' + this.settings.$el.data('ajax-indicator-id'));
         } else {
@@ -57,16 +57,16 @@
 
       } else if (this.settings.elementType === 'A') {
         this.settings.url = this.settings.$el.attr('href');
-        
+
         if (this.settings.$el.data('ajax-indicator-id')) {
           this.settings.indicatorTarget = $('#' + this.settings.$el.data('ajax-indicator-id'));
-        } 
-        
+        }
+
       } else {
         if (this.settings.elementType === 'TEMPLATE') {
           this.settings.url = this.settings.$el.data('ajax-url');
           this.settings.ignore = false;
-          
+
           if (
             (this.settings.$el.data('ajax-ignore'))
             && (
@@ -76,7 +76,7 @@
           ){
             this.settings.ignore = true;
           }
-          
+
           if (! this.settings.ignore) {
             if (this.settings.$el.data('ajax-max-width')) {
               this.sendOnViewport();
@@ -110,14 +110,14 @@
 
             // Regular AJAX form
             this.settings.$el.on('submit', this.sendForm.bind(this));
-            
+
             if (! this.settings.$el.hasClass('ajax-submit-only')) {
               this.settings.formElements.each(function () {
                 $(this)
                   .on('change', self.sendForm.bind(self));
               });
             }
-            
+
             if (this.settings.$el.find('.ajax-send')) {
               // AJAX send links
               this.settings.$el.find('.ajax-send')
@@ -171,14 +171,14 @@
 
       var html = $.parseHTML('<div class="' + this.settings.loadingIndicatorHtmlClass + '">' + this.settings.loadingIndicatorHtml + '</div>');
       this.settings.$el.addClass(this.settings.loadingIndicatorActiveClass).blur();
-       
+
       if (this.settings.indicatorTarget) {
         this.settings.indicatorTarget.addClass(this.settings.loadingIndicatorTargetClass);
         this.settings.indicatorTarget.append(html);
-      }     
+      }
     },
 
-    
+
     removeLoadingIndicator: function () {
 
       try {
@@ -299,7 +299,7 @@
       var templateTag = this.settings.$el;
       var data = [];
       var requestId = this.generateRequestId();
-      
+
       if (
         (url)
         && (templateTag.data('ajax-max-width') >= jQuery(window).width())
@@ -325,27 +325,27 @@
       data.unshift({name: 'type', value: 250});
 
       $.ajax({
-         method: 'post',
-         url: url,
-         data: $.param(data),
-         dataType: 'json',
-         complete: function (response) {
-           try {
+               method: 'post',
+               url: url,
+               data: $.param(data),
+               dataType: 'json',
+               complete: function (response) {
+                 try {
 
-             // Successful request
-             response = JSON.parse(response.responseText);
-             // console.log(response);
-             self.parseContent(response);
-             self.removeLoadingIndicator();
-             if (! background) {
-               self.updateBrowserHistory(response, url, $.param(data));
-             }
-           } catch (error) {
-             // Error in request
-             console.log(error.message);
-           }
-         }
-       });
+                   // Successful request
+                   response = JSON.parse(response.responseText);
+                   // console.log(response);
+                   self.parseContent(response);
+                   self.removeLoadingIndicator();
+                   if (! background) {
+                     self.updateBrowserHistory(response, url, $.param(data));
+                   }
+                 } catch (error) {
+                   // Error in request
+                   console.log(error.message);
+                 }
+               }
+             });
     },
     parseContent: function (json) {
       for (var property in json) {
@@ -388,13 +388,16 @@
 
     appendContent: function (element, content) {
       try {
+        var oldContent = jQuery('#' + element);
+        oldContent.find('a').last().focus();
+
         var newContent = jQuery(content);
         newContent.ajaxApi().find('.ajax').ajaxApi();
-        newContent.appendTo(jQuery('#' + element));
+        newContent.appendTo(oldContent);
 
         jQuery(document)
           .trigger(
-            'ajax-api-content-changed',
+            'tx-ajax-api-content-changed',
             newContent.parent()
           );
       } catch (error) {
@@ -410,7 +413,7 @@
 
         jQuery(document)
           .trigger(
-            'ajax-api-content-changed',
+            'tx-ajax-api-content-changed',
             newContent.parent()
           );
       } catch (error) {
@@ -429,8 +432,8 @@
           );
 
           jQuery(document)
-            .trigger('ajax-api-content-changed',
-              newContent
+            .trigger('tx-ajax-api-content-changed',
+                     newContent
             );
 
         } else {
