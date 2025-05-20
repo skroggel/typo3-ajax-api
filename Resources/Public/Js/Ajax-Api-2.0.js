@@ -91,7 +91,6 @@
 
     // Bind all event listeners for this plugin
     bindEvents: function () {
-
       if (this.settings.elementType === 'FORM') {
         var self = this;
         if (
@@ -161,7 +160,7 @@
       } else {
         if (this.settings.elementType === 'TEMPLATE') {
           if (this.settings.$el.data('ajax-max-width')) {
-            jQuery(window).on('resize', this.sendOnViewport.bind(this));
+            jQuery(window).on('resize', this.debounce(this.sendOnViewport.bind(this), 300));
           }
         }
       }
@@ -480,6 +479,25 @@
         window.location.pathname
       );*/
     },
+
+    /**
+     * Debouncing to reduce repaints
+     *
+     * @param func
+     * @param delay
+     * @returns {(function(): void)|*}
+     */
+    debounce: function (func, delay) {
+      var timeout;
+      return function () {
+        var context = this;
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+          func.apply(context);
+        }, delay);
+      };
+    }
+
   });
 
   // A really lightweight plugin wrapper around the constructor,
