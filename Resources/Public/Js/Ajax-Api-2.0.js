@@ -3,7 +3,8 @@
  * AJAX API
  *
  * Author: Steffen Kroggel <developer@steffenkroggel.de>
- * Last updated: 10.11.2021
+ * Author: Christian Dilger <c.dilger@addorange.de>
+ * Last updated: 20.05.2025
  */
 
 (function ($, window, document, undefined) {
@@ -19,6 +20,7 @@
       loadingIndicatorTargetClass: 'is-ajax-target',
       loadingIndicatorHtml: '<div class="loading-indicator"></div>',
       loadingIndicatorHtmlClass: 'ajax-overlay',
+      lastVisualViewportWidth: 0,
     };
 
   // The plugin constructor
@@ -38,6 +40,11 @@
       // Setup elements and global variables
       this.settings.$el = $(this.element);
       this.settings.elementType = this.settings.$el.prop('tagName');
+
+      //  set initial visual viewport width to allow checking
+      //  on undesired resize events in case of altering viewport height,
+      //  e.g. by displaying virtual keyboard on android devices
+      this.settings.lastVisualViewportWidth = window.visualViewport.width;
 
       if (this.settings.elementType === 'FORM') {
         this.settings.formElements = this.settings.$el.find(':input:not(.btn)');
@@ -91,7 +98,6 @@
 
     // Bind all event listeners for this plugin
     bindEvents: function () {
-
       if (this.settings.elementType === 'FORM') {
         var self = this;
         if (
@@ -161,7 +167,19 @@
       } else {
         if (this.settings.elementType === 'TEMPLATE') {
           if (this.settings.$el.data('ajax-max-width')) {
-            jQuery(window).on('resize', this.sendOnViewport.bind(this));
+
+
+            jQuery(window.visualViewport)
+              .on('resize', (event) => {
+
+                var currentVisualViewportWidth= window.visualViewport.width;
+
+                if (currentVisualViewportWidth !== this.settings.lastVisualViewportWidth) {
+                  this.settings.lastVisualViewportWidth = currentVisualViewportWidth;
+                  this.debounce(this.sendOnViewport.bind(this), 300)();
+                }
+
+              });
           }
         }
       }
@@ -302,8 +320,9 @@
 
       if (
         (url)
-        && (templateTag.data('ajax-max-width') >= jQuery(window).width())
-      ){
+        && (templateTag.data('ajax-max-width') >= jQuery(window)
+          .width())
+      ) {
         this.ajaxRequest(requestId, url, data, true);
       }
     },
@@ -331,7 +350,6 @@
                dataType: 'json',
                complete: function (response) {
                  try {
-
                    // Successful request
                    response = JSON.parse(response.responseText);
                    // console.log(response);
@@ -346,6 +364,7 @@
                  }
                }
              });
+
     },
     parseContent: function (json) {
       for (var property in json) {
@@ -422,6 +441,7 @@
     },
 
     replaceContent: function (element, content) {
+
       try {
         if (jQuery(content).length > 0) {
           var newContent = jQuery(content);
@@ -480,6 +500,25 @@
         window.location.pathname
       );*/
     },
+
+    /**
+     * Debouncing to reduce repaints
+     *
+     * @param func
+     * @param delay
+     * @returns {(function(): void)|*}
+     */
+    debounce: function (func, delay) {
+      var timeout;
+      return function () {
+        var context = this;
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+          func.apply(context);
+        }, delay);
+      };
+    }
+
   });
 
   // A really lightweight plugin wrapper around the constructor,
