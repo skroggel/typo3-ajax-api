@@ -168,15 +168,20 @@
         if (this.settings.elementType === 'TEMPLATE') {
           if (this.settings.$el.data('ajax-max-width')) {
 
+            var debouncedSendOnViewport = this.debounce(this.sendOnViewport.bind(this), 300);
 
             jQuery(window.visualViewport)
               .on('resize', (event) => {
 
                 var currentVisualViewportWidth= window.visualViewport.width;
 
+                if ($('body').hasClass('lock-scroll')) {
+                  return;
+                }
+
                 if (currentVisualViewportWidth !== this.settings.lastVisualViewportWidth) {
                   this.settings.lastVisualViewportWidth = currentVisualViewportWidth;
-                  this.debounce(this.sendOnViewport.bind(this), 300)();
+                  debouncedSendOnViewport();
                 }
 
               });
